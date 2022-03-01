@@ -1,8 +1,6 @@
 
 
-const getStorage = (key) => {
-  JSON.parse(localStorage.getItem(key)) || [];
-};
+const getStorage = key => JSON.parse(localStorage.getItem(key)) || [];
 
 
 const setStorage = (key, obj) => {
