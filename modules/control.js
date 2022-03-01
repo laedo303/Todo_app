@@ -1,7 +1,12 @@
 import {newTask} from './createElems.js';
 import {createTask} from './createElems.js';
-import {deskTaskInput, form, todoItem, todosWrapper} from './getDocElems.js';
 import {getStorage, updateLocal} from './serviseStorage.js';
+import {
+  btnComlete,
+  deskTaskInput,
+  form,
+  todoItem,
+  todosWrapper} from './getDocElems.js';
 
 
 export const addUserToLocal = (userName) => {
@@ -13,18 +18,20 @@ export const addUserToLocal = (userName) => {
   });
 };
 
-export const checkCompleted = () => {
-  const btnComplete = document.querySelector('btn-complete');
-  btnComplete.addEventListener('click', () => {
-    todoItem.classList.toggle('.checked');
-  });
-};
-
 
 export const addToPage = (userName) => {
   const getLocal = getStorage(userName);
-  console.log('getLocal: ', getLocal);
   getLocal.forEach(task => {
     todosWrapper.append(createTask(task));
+  });
+};
+
+export const checkCompleted = () => {
+  todosWrapper.addEventListener('click', (e) => {
+    const target = e.target;
+    console.log(target);
+    if (target === btnComlete) {
+      todoItem.classList.add('completed');
+    }
   });
 };
