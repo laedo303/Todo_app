@@ -26,20 +26,17 @@ export function addToPage(userName) {
   });
 }
 
-export const checkCompleted = () => {
+export const controlTask = () => {
   todosWrapper.addEventListener('click', (e) => {
     const target = e.target;
-    console.log(target);
-    const todoItem = document.querySelector('.todo-item');
-    const btnComlete = document.querySelector('.btn-complete');
-    const btnDel = document.querySelector('.btn-delete');
 
-
-    if (target === btnComlete) {
-      todoItem.classList.toggle('completed');
+    if (target.classList.contains('btn-complete')) {
+      target.closest('.todo-item').classList.toggle('checked');
     }
-    if (target === btnDel) {
-
+    if (target.classList.contains('btn-delete')) {
+      target.closest('.todo-item').remove();
     }
   });
 };
+// осталось сделать localStorage и ограничить ввод пробелов
+

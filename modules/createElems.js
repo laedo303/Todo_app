@@ -12,11 +12,14 @@ export const createTask = (obj) => {
   todoItem.insertAdjacentHTML('beforeend', `
   <div class="description">${obj.description}</div>
   <div class="buttons">
-  <input class="btn-complete" type="checkbox" />
+  <input class="btn-complete" type="checkbox">
   <button class="btn-delete">delete</button>
   </div>
   </div>
   `);
+  if (newTask.completed === true) {
+    todoItem.classList.add('checked');
+  }
   return todoItem;
 };
 
