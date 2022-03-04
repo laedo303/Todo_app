@@ -1,5 +1,3 @@
-
-
 export const getStorage = key => JSON.parse(localStorage.getItem(key)) || [];
 
 

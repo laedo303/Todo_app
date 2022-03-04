@@ -3,10 +3,10 @@ import {addToPage, addUserToLocal, controlTask} from './modules/control.js';
 
 {
   const init = () => {
-    const userName = 'kos'; // prompt('Введите логин:').trim();
+    const userName = prompt('Введите логин:').trim();
     addUserToLocal(userName);
     addToPage(userName);
-    controlTask();
+    controlTask(userName);
   };
   window.todo = init;
 }

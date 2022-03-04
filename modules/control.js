@@ -4,7 +4,8 @@ import {getStorage, updateLocal} from './serviseStorage.js';
 import {
   deskTaskInput,
   form,
-  todosWrapper} from './getDocElems.js';
+  todosWrapper,
+} from './getDocElems.js';
 
 
 export const addUserToLocal = (userName) => {
@@ -26,17 +27,27 @@ export function addToPage(userName) {
   });
 }
 
-export const controlTask = () => {
+export const controlTask = (userName) => {
   todosWrapper.addEventListener('click', (e) => {
     const target = e.target;
 
     if (target.classList.contains('btn-complete')) {
       target.closest('.todo-item').classList.toggle('checked');
+      const tasks = getStorage(userName);
+      console.log('tasks: ', tasks);
     }
     if (target.classList.contains('btn-delete')) {
       target.closest('.todo-item').remove();
     }
+
+    const todoItem = document.querySelectorAll('.todo-item');
+
+    todoItem.forEach((item, index) => {
+      console.log('index', index);
+    });
   });
 };
+
+
 // осталось сделать localStorage и ограничить ввод пробелов
 
