@@ -47,10 +47,10 @@ export const controlTask = (userName) => {
     if (target.classList.contains('btn-complete')) {
       target.closest('.todo-item').classList.toggle('checked');
     }
+
     if (target.classList.contains('btn-delete')) {
       target.closest('.todo-item').classList.add('delete');
     }
-
 
     todoItem.forEach((item, index) => {
       if (item.classList.contains('checked')) {
@@ -58,13 +58,17 @@ export const controlTask = (userName) => {
         tasks[index].completed = true;
         setStorage(userName, tasks);
       }
+    });
 
+    todoItem.forEach((item, index) => {
       if (!item.classList.contains('checked')) {
         const tasks = getStorage(userName);
         tasks[index].completed = false;
         setStorage(userName, tasks);
       }
+    });
 
+    todoItem.forEach((item, index) => {
       if (item.classList.contains('delete')) {
         const tasks = getStorage(userName);
         tasks.splice(index, 1);
@@ -74,7 +78,3 @@ export const controlTask = (userName) => {
     });
   });
 };
-
-
-// ограничить ввод пробелов
-
