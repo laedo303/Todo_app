@@ -11,10 +11,19 @@ import {
 export const addUserToLocal = (userName) => {
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    newTask.description = deskTaskInput.value;
-    updateLocal(userName, newTask);
-    addToPage(userName);
-    form.reset();
+
+
+    if (
+      deskTaskInput.value.trim() === '' ||
+      deskTaskInput.value === undefined ||
+      deskTaskInput.value === null
+    ) return;
+    else {
+      newTask.description = deskTaskInput.value.trim();
+      updateLocal(userName, newTask);
+      addToPage(userName);
+      form.reset();
+    }
   });
 };
 
