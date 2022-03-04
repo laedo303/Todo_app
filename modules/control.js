@@ -1,6 +1,6 @@
 import {newTask} from './createElems.js';
 import {createTask} from './createElems.js';
-import {getStorage, updateLocal} from './serviseStorage.js';
+import {getStorage, setStorage, updateLocal} from './serviseStorage.js';
 import {
   deskTaskInput,
   form,
@@ -22,32 +22,50 @@ export const addUserToLocal = (userName) => {
 export function addToPage(userName) {
   todosWrapper.innerHTML = '';
   const getLocal = getStorage(userName);
+
   getLocal.forEach(task => {
     todosWrapper.append(createTask(task));
   });
 }
 
+
 export const controlTask = (userName) => {
   todosWrapper.addEventListener('click', (e) => {
     const target = e.target;
 
+    const todoItem = Array.from(todosWrapper.children);
+
     if (target.classList.contains('btn-complete')) {
       target.closest('.todo-item').classList.toggle('checked');
-      const tasks = getStorage(userName);
-      console.log('tasks: ', tasks);
     }
     if (target.classList.contains('btn-delete')) {
-      target.closest('.todo-item').remove();
+      target.closest('.todo-item').classList.add('delete');
     }
 
-    const todoItem = document.querySelectorAll('.todo-item');
 
     todoItem.forEach((item, index) => {
-      console.log('index', index);
+      if (item.classList.contains('checked')) {
+        const tasks = getStorage(userName);
+        tasks[index].completed = true;
+        setStorage(userName, tasks);
+      }
+
+      if (!item.classList.contains('checked')) {
+        const tasks = getStorage(userName);
+        tasks[index].completed = false;
+        setStorage(userName, tasks);
+      }
+
+      if (item.classList.contains('delete')) {
+        const tasks = getStorage(userName);
+        tasks.splice(index, 1);
+        setStorage(userName, tasks);
+        addToPage(userName);
+      }
     });
   });
 };
 
 
-// осталось сделать localStorage и ограничить ввод пробелов
+// ограничить ввод пробелов
 
