@@ -1,3 +1,5 @@
-const addTask = document.getElementById('add-task');
-const deskTaskInput = document.getElementById('description-task');
-const todosWrapper = document.querySelector('.todos-wrapper');
+export const form = document.getElementById('form');
+export const addTask = document.getElementById('add-task');
+export const deskTaskInput = document.getElementById('description-task');
+export const todosWrapper = document.querySelector('.todos-wrapper');
+
